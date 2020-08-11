@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="StyleSheet1.css">
+</head>
+<body>
+    <div id="navbar" class="sticky">
+        <a href="#home">Home</a>
+        <a href="#about">About Us</a>
+        <a href="#achievements">Achievements</a>
+        <a href="#ahead">Upcoming Competitions</a>
+    </div>
+    <div class="bgimg-1 header" id="home">
+        <div class="caption">
+            <span class="border">A V I O N S</span>
+        </div>
+    </div>
+
+    <!--<div class="header">
+        <h2>Scroll Down</h2>
+        <p>Scroll down to see the sticky effect.</p>
+    </div>
+        -->
+
+    <div id="about" style="color: #777; background-color: white; text-align: center; padding: 50px 80px; text-align: justify;">
+        <h3 style="text-align:center;">About Us</h3>
+        <!--asd-->
+    </div>
+
+    <div class="bgimg-2">
+        <div  id="about_cont_1" class="caption-big" style="background-color: rgba(0,0,0,0.5)">
+            <span class="border-big" style="background-color:transparent;font-size:25px;color: #f7f7f7;">
+                Avions is the official Aero Design Club of PESIT-BSC. The team<br />
+                encompasses of students with zeal to excel, who work with<br />
+                tremendous perseverance to think beyond the horizon and<br />
+                achieve the unsurpassed. The team includes students from<br />
+                multiple disciplines striving to achieve a common goal.<br />
+            </span>
+        </div>
+    </div>
+
+    <div id="achievements" style="position:relative;">
+        <div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
+            <h3 style="text-align:center;color:azure">Achievements</h3>
+            <!--<p>Scroll up and down to really get the feeling of how Parallax Scrolling works.</p>-->
+        </div>
+    </div>
+
+    <div class="bgimg-3">
+        <div class="caption-big">
+            <!--<span class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">SCROLL UP</span>-->
+            <div class="card border" style="background: rgb(0,0,0,0.8);">
+                <p>STUFF</p>
+            </div>
+            <div class="card border" style="background: rgb(0,0,0,0.8);">
+                <p>STUFF</p>
+            </div>
+            <div class="card border" style="background: rgb(0,0,0,0.8);">
+                <p>STUFF</p>
+            </div>
+            <div class="card border" style="background: rgb(0,0,0,0.8);">
+                <p>STUFF</p>
+            </div>
+            <div class="card border" style="background: rgb(0,0,0,0.8);">
+                <p>STUFF</p>
+            </div>
+            <div class="card border" style="background: rgb(0,0,0,0.8);">
+                <p>STUFF</p>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="ahead" style="position:relative;">
+        <div style="color:#ddd;background-color:#282E34;text-align:center;padding:50px 80px;text-align: justify;">
+            <h3 style="text-align:center;color:azure">Upcoming Competitions</h3>
+            <!--<p>Scroll up and down to really get the feeling of how Parallax Scrolling works.</p>-->
+        </div>
+    </div>
+
+    <div class="bgimg-1">
+        <div class="caption">
+            <span class="border">COOL!</span>
+        </div>
+    </div>
+    <script>
+        window.onscroll = function () { this.navbar_entry() };
+        //window.onscroll = function () { this.cont_entry() };
+
+        var navbar = document.getElementById("navbar");
+        var cont = document.getElementById("about")
+        var sticky = cont.offsetTop;
+        //console.log("ABOUT TOP:", sticky);
+        var s1 = document.getElementById("about");
+        console.log("ABOUT:", s1.offsetTop);
+        var s2 = document.getElementById("achievements");
+        console.log("ACHIEVEMENTS:", s2.offsetTop);
+        var s3 = document.getElementById("ahead");
+        console.log("AHEAD:", s3.offsetTop);
+
+        function navbar_entry() {
+            if (window.pageYOffset % 10 == 0) {
+                console.log(window.pageYOffset);
+            }
+            if ((window.pageYOffset >= sticky - 300) && navbar.style.opacity <= 1) {
+                navbar.style.opacity = (window.pageYOffset - (sticky - 150)) / 100;
+
+            } else if (window.pageYOffset <= sticky - 300) {
+                navbar.style.opacity = 0;
+            }
+            //cont_entry();
+        }
+    </script>
+</body>
+</html>
