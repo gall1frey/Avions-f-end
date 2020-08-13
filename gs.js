@@ -59,3 +59,84 @@ gsap.to("#hme", {
     duration: 2
 }
 );*/
+
+var buttons = document.querySelectorAll(".btn");
+var modalOverlay = document.querySelector(".modalOverlay");
+var modal = document.querySelector(".messageWrapper");
+var lastButton;
+
+TweenMax.set([modalOverlay, modal], { autoAlpha: 0 });
+
+for (var i = 0; i < buttons.length; i++) {
+    buttons[i].addEventListener("click", popUp);
+}
+
+function popUp() {
+    var newRect = getPosition(modal, this);
+    
+    //console.log(newRect);
+    lastButton = this;
+
+    TweenMax.set(modal, {
+        x: newRect.left,
+        y: newRect.top,
+        width: newRect.width,
+        height: newRect.height
+    });
+
+    var show = new TimelineMax();
+
+    show.to(modalOverlay, 0.5, { autoAlpha: 0.75 });
+    show.to(modal, 0.5, {
+        x: 0,
+        y: 0,
+        width: 800,
+        height: 400,
+        autoAlpha: 1
+    });
+    
+    document.querySelector(".message").innerHTML = `
+                <div style="font-size:20px;float:left;width:40%;">
+                    <p style="font-weight:700">` + this.children[0].textContent +`</p>
+                    ` + this.children[1].textContent+ `
+                </div>
+                <div style="float:right;width:50%;">
+                    <img src="img_parallax4.jpg" style="height:200px; width=400px;">
+                </div>`;
+}
+
+modalOverlay.addEventListener("click", function () {
+    var newRect = getPosition(modal, lastButton);
+    var hide = new TimelineMax();
+
+    TweenMax.killTweensOf(".messageWrapper");
+
+    hide.to(modal, 0.5, {
+        autoAlpha: 0,
+        x: newRect.left,
+        y: newRect.top,
+        height: newRect.height,
+        width: newRect.width
+    });
+    hide.to(".modalOverlay", 0.5, { autoAlpha: 0 });
+});
+
+function getPosition(elem, target) {
+    var targetRect = target.getBoundingClientRect();
+    var elemRect = elem.getBoundingClientRect();
+
+    TweenLite.set(elem, {
+        x: 0,
+        y: 0,
+        width: targetRect.width,
+        height: targetRect.height
+    });
+    var newRect = elem.getBoundingClientRect();
+    TweenLite.set(elem, { width: elemRect.width, height: elemRect.height });
+    return {
+        left: targetRect.left - newRect.left,
+        top: targetRect.top - newRect.top,
+        width: newRect.width,
+        height: newRect.height
+    };
+}
